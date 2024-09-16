@@ -46,22 +46,22 @@ async function handleAutomate(BEARERS) {
   });
   
   cron.schedule('1 7 * * *', () => {
-      console.log('Running Checkin and Task'.cyan);
+      console.log('Checking in...'.cyan);
       runCheckin(BEARERS);
   });
 
   cron.schedule('3 7,15,23 * * *', () => {
-      console.log(`Running Farm`.cyan);
+      console.log(`Farming...`.cyan);
       runFarm(BEARERS);
   });
 
   cron.schedule('5 0-23 * * *', () => {
-      console.log(`Running Mine`.cyan);
+      console.log(`Mining...`.cyan);
       runMine(BEARERS);
   });
 
   cron.schedule('10 7 * * 1,3,5', () => {
-      console.log(`Running Mine`.cyan);
+      console.log(`Completing tasks...`.cyan);
       runTasks(BEARERS);
   });
   
