@@ -37,8 +37,9 @@ async function handleAutomate(BEARERS) {
     console.log(`Fetching data, please wait...`.yellow);
     console.log('')
     console.log(`Current time: ${currentTime.toLocaleTimeString('en-GB')}`);
-    createTable(BEARERS, fetchReferralData);
-    console.log('')
+    const tables = createTable(BEARERS, fetchReferralData);
+    console.log(tables);
+    console.log('');
   });
 
   cron.schedule('1 7 * * *', () => {
