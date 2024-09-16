@@ -32,16 +32,19 @@ async function handleAutomate(BEARERS) {
   await runTasks(BEARERS);
   console.log('Completed ✓\n'.green);
 
-  cron.schedule('0 0-23 * * *', () => {
-    const currentTime = new Date();
-    console.log(`Fetching data, please wait...`.yellow);
-    console.log('')
-    console.log(`Current time: ${currentTime.toLocaleTimeString('en-GB')}`);
-    const tables = createTable(BEARERS, fetchReferralData);
-    console.log(tables);
-    console.log('');
+  cron.schedule('0 0-23 * * *', async () => {
+    try {
+        const currentTime = new Date();
+        console.log(`Fetching data, please wait...`.yellow);
+        console.log('')
+        console.log(`Current time: ${currentTime.toLocaleTimeString('en-GB')}`);
+        const tables = await createTable(BEARERS, fetchReferralData);
+        console.log(tables);
+    } catch (error) {
+        console.log('');
+    }
   });
-
+  
   cron.schedule('1 7 * * *', () => {
       console.log('Running Checkin and Task'.cyan);
       runCheckin(BEARERS);
